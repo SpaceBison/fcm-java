@@ -1,0 +1,3 @@
+[submodule "fcm-json-schema"]
+	path = fcm-json-schema
+	url = git@github.com:SpaceBison/fcm-json-schema.git
