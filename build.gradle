@@ -17,13 +17,13 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
     compile 'com.google.code.gson:gson:2.8.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.3.0'
 }
 
 sourceSets {
     generated {
-        java {
-            srcDir "${project.buildDir}/generated-sources"
-        }
+        java
     }
 }
 
@@ -31,7 +31,9 @@ sourceSets {
 jsonSchema2Pojo {
     generateBuilders = true
     source = fileTree("${project.projectDir}/fcm-json-schema/").include('*.json')
+    targetDirectory = file('src/generated/java/')
     targetPackage = 'com.google.firebase.fcm'
     annotationStyle = 'gson'
     useCommonsLang3 = true
+    initializeCollections = false
 }
