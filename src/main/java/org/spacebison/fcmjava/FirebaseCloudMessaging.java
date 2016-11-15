@@ -1,5 +1,8 @@
 package org.spacebison.fcmjava;
 
+import com.google.firebase.fcm.FcmDownstreamMessage;
+import com.google.firebase.fcm.FcmDownstreamMessageResult;
+import com.google.firebase.fcm.FcmDownstreamTopicMessageResult;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;

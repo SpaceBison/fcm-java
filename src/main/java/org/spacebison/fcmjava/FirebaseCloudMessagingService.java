@@ -1,5 +1,9 @@
 package org.spacebison.fcmjava;
 
+import com.google.firebase.fcm.FcmDownstreamMessage;
+import com.google.firebase.fcm.FcmDownstreamMessageResult;
+import com.google.firebase.fcm.FcmDownstreamTopicMessageResult;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
