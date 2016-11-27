@@ -9,6 +9,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,6 +26,9 @@ public class FirebaseCloudMessaging {
     public static final int ERROR_NO_API_KEY = -3;
     private final Gson mGson = new Gson();
     private final FirebaseCloudMessagingService mService = new Retrofit.Builder()
+            .client(new OkHttpClient.Builder()
+                    .addInterceptor(new NoCacheRequestHeaderInterceptor())
+                    .build())
             .addConverterFactory(GsonConverterFactory.create(mGson))
             .baseUrl("https://fcm.googleapis.com/fcm/")
             .build()
@@ -87,9 +91,9 @@ public class FirebaseCloudMessaging {
                 try {
                     String errorBody = response.errorBody().string();
                     try {
-                        T result = mGson.fromJson(errorBody, new TypeToken<T>() {}.getType());
+                        T result = mGson.fromJson(errorBody, new TypeToken<T>(){}.getType());
                         mListener.onCompleted(result);
-                    } catch (JsonSyntaxException e) {
+                    } catch (JsonSyntaxException | ClassCastException e) {
                         System.out.println(errorBody);
                         mListener.onError(ERROR_INVALID_RESPONSE, errorBody);
                     }

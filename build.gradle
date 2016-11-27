@@ -13,6 +13,9 @@ buildscript {
     }
 }
 
+targetCompatibility = '1.7'
+sourceCompatibility = '1.7'
+
 dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
     compile 'com.google.code.gson:gson:2.8.0'
@@ -36,4 +39,5 @@ jsonSchema2Pojo {
     annotationStyle = 'gson'
     useCommonsLang3 = true
     initializeCollections = false
+    removeOldOutput = true
 }
