@@ -1,5 +1,14 @@
 apply plugin: 'java'
 apply plugin: 'jsonschema2pojo'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.SpaceBison'
+
+repositories {
+    mavenLocal()
+    jcenter()
+    maven { url 'https://jitpack.io' }
+}
 
 buildscript {
     repositories {
@@ -7,9 +16,9 @@ buildscript {
     }
 
     dependencies {
-        // this plugin
         classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:0.4.27'
-        // add additional dependencies here if you wish to reference instead of generate them (see example directory)
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+
     }
 }
 
@@ -30,7 +39,6 @@ sourceSets {
     }
 }
 
-// Each configuration is set to the default value
 jsonSchema2Pojo {
     generateBuilders = true
     source = fileTree("${project.projectDir}/fcm-json-schema/").include('*.json')
@@ -40,4 +48,9 @@ jsonSchema2Pojo {
     useCommonsLang3 = true
     initializeCollections = false
     removeOldOutput = true
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.13'
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
 }
